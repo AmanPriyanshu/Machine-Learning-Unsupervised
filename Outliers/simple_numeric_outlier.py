@@ -25,8 +25,9 @@ def numeric_outlier(X, k):
 	outliers_index = [i for i in range(len(X)) if X[i]<Q1-k*IQR or X[i]>Q3+k*IQR]
 	return outliers_index
 
-def imager(X, Y):
+def imager(X, Y, outlier_X, outlier_Y):
 	plt.scatter(X, Y, color='green', marker='.')
+	plt.scatter(outlier_X, outlier_Y, color='red', marker='*')
 	plt.savefig('numeric_outlier.png')
 	plt.clf()
 
@@ -43,11 +44,13 @@ def accuracy(outliers_index, X):
 
 def main(X, k):
 	outliers_index = numeric_outlier(X, k)
+	imager(range(len(X)), X, outliers_index, [X[i] for i in outliers_index])
+	#print(X)
 	return accuracy(outliers_index, X)
 
 if __name__ == "__main__": 
 	k = 0.45
-	random.seed(1)
+	random.seed(0)
 	X = dataset_developer(1000)
 	X.sort()
 	acc = main(X, k)
