@@ -20,7 +20,7 @@ def normalizer(X):
 	x = [(i-np.min(i))/(np.max(i)-np.min(i)) for i in X.T]
 	return np.array(x).T
 
-def main(path):
+def main_data(path):
 	data = data_extractor(path)
 	np.random.seed(0)
 	np.random.shuffle(data)
